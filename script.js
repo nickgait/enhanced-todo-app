@@ -8,6 +8,7 @@ let currentSearch = '';
 let editingTodoId = null; // Track which todo is being edited
 let selectedTodos = new Set(); // Track selected todos for bulk actions
 let draggedTodoId = null; // Track which todo is being dragged
+let currentTheme = 'light'; // Track current theme
 
 // Collection of Quran verses that rotate daily
 const quranVerses = [
@@ -935,5 +936,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Load todos when the page first loads
-window.addEventListener('load', loadTodos);
+// Dark Mode Theme Functions
+function loadTheme() {
+    // Load saved theme preference or default to light
+    const savedTheme = localStorage.getItem('todoAppTheme') || 'light';
+    currentTheme = savedTheme;
+    applyTheme(savedTheme);
+}
+
+function applyTheme(theme) {
+    const body = document.body;
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    
+    if (theme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light';
+    } else {
+        body.removeAttribute('data-theme');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark';
+    }
+    
+    currentTheme = theme;
+}
+
+function toggleTheme() {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(newTheme);
+    saveTheme(newTheme);
+    
+    // Add a subtle animation feedback
+    const toggleButton = document.getElementById('themeToggle');
+    toggleButton.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        toggleButton.style.transform = '';
+    }, 150);
+}
+
+function saveTheme(theme) {
+    localStorage.setItem('todoAppTheme', theme);
+}
+
+// Enhanced load function that includes theme loading
+function initializeApp() {
+    loadTheme(); // Load theme first
+    loadTodos(); // Then load todos
+}
+
+// Load app when the page first loads
+window.addEventListener('load', initializeApp);

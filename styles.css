@@ -1,24 +1,112 @@
 /* Enhanced Todo App Styles */
 
+/* CSS Variables for Theme Support */
+:root {
+    /* Light Theme Colors */
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f8f9fa;
+    --bg-accent: #e7f3ff;
+    --bg-input: #ffffff;
+    
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-tertiary: #495057;
+    --text-muted: #6c757d;
+    
+    --border-light: #e9ecef;
+    --border-medium: #ddd;
+    --border-accent: #ced4da;
+    
+    --shadow-light: rgba(0,0,0,0.1);
+    --shadow-medium: rgba(0,0,0,0.15);
+    --shadow-heavy: rgba(0,0,0,0.3);
+    
+    --accent-blue: #007bff;
+    --accent-blue-hover: #0056b3;
+    --accent-blue-light: rgba(0,123,255,0.25);
+    
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+    
+    --priority-high-bg: #fff5f5;
+    --priority-high-text: #c62828;
+    --priority-medium-bg: #fffbf0;
+    --priority-medium-text: #ef6c00;
+    --priority-low-bg: #f8fff8;
+    --priority-low-text: #2e7d32;
+    
+    --category-bg: #e9ecef;
+    --category-text: #495057;
+    --category-hover: #dee2e6;
+}
+
+/* Dark Theme Colors */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #3a3a3a;
+    --bg-accent: #1e3a5f;
+    --bg-input: #404040;
+    
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-tertiary: #b0b0b0;
+    --text-muted: #888888;
+    
+    --border-light: #4a4a4a;
+    --border-medium: #555555;
+    --border-accent: #666666;
+    
+    --shadow-light: rgba(0,0,0,0.3);
+    --shadow-medium: rgba(0,0,0,0.4);
+    --shadow-heavy: rgba(0,0,0,0.6);
+    
+    --accent-blue: #4da3ff;
+    --accent-blue-hover: #3399ff;
+    --accent-blue-light: rgba(77,163,255,0.25);
+    
+    --success-color: #4caf50;
+    --warning-color: #ffeb3b;
+    --danger-color: #f44336;
+    --info-color: #2196f3;
+    
+    --priority-high-bg: #4a2c2c;
+    --priority-high-text: #ff7979;
+    --priority-medium-bg: #4a4a2c;
+    --priority-medium-text: #fdcb6e;
+    --priority-low-bg: #2c4a2c;
+    --priority-low-text: #81c784;
+    
+    --category-bg: #4a4a4a;
+    --category-text: #cccccc;
+    --category-hover: #555555;
+}
+
 /* Base Styles */
 body {
     font-family: Arial, sans-serif;
     max-width: 900px;
     margin: 30px auto;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
-    background: white;
+    background: var(--bg-secondary);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: var(--text-primary);
     margin-bottom: 10px;
 }
 
@@ -26,9 +114,10 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
     padding: 20px;
-    background: #f8f9fa;
+    background: var(--bg-tertiary);
     border-radius: 8px;
-    border-left: 4px solid #007bff;
+    border-left: 4px solid var(--accent-blue);
+    transition: background-color 0.3s ease;
 }
 
 /* Statistics Styles */
@@ -41,35 +130,37 @@ h1 {
 }
 
 .stat-item {
-    background: white;
+    background: var(--bg-secondary);
     padding: 10px 20px;
     border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px var(--shadow-light);
     text-align: center;
     min-width: 120px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-number {
     font-size: 24px;
     font-weight: bold;
-    color: #007bff;
+    color: var(--accent-blue);
 }
 
 .stat-label {
     font-size: 14px;
-    color: #666;
+    color: var(--text-secondary);
     margin-top: 5px;
 }
 
 /* Verse Container Styles */
 .verse-container {
-    background: #e7f3ff;
+    background: var(--bg-accent);
     padding: 15px;
     border-radius: 6px;
     margin: 15px 0;
-    border-left: 3px solid #007bff;
+    border-left: 3px solid var(--accent-blue);
     font-style: italic;
-    color: #495057;
+    color: var(--text-tertiary);
+    transition: background-color 0.3s ease;
 }
 
 .verse-text {
@@ -79,17 +170,18 @@ h1 {
 
 .verse-reference {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     text-align: right;
 }
 
 /* Form Styles */
 .input-section {
-    background: #f8f9fa;
+    background: var(--bg-tertiary);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--border-light);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .form-row {
@@ -105,10 +197,13 @@ h1 {
 
 input[type="text"], input[type="date"], textarea, select {
     padding: 10px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-medium);
     border-radius: 5px;
     font-size: 14px;
     font-family: Arial, sans-serif;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 input[type="text"] {
@@ -133,22 +228,23 @@ label {
     font-weight: bold;
     min-width: 80px;
     font-size: 14px;
-    color: #495057;
+    color: var(--text-tertiary);
 }
 
 /* Button Styles */
 button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: var(--accent-blue);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: var(--accent-blue-hover);
 }
 
 /* Todo List Styles */
@@ -166,16 +262,17 @@ button:hover {
 
 .filter-btn {
     padding: 8px 16px;
-    background-color: #6c757d;
+    background-color: var(--text-muted);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
 .filter-btn.active {
-    background-color: #007bff;
+    background-color: var(--accent-blue);
 }
 
 .filter-btn:hover {
@@ -184,41 +281,42 @@ button:hover {
 
 /* Todo Item Styles */
 .todo-item {
-    background: #fff;
+    background: var(--bg-secondary);
     margin: 15px 0;
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid #007bff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--accent-blue);
+    box-shadow: 0 2px 4px var(--shadow-light);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .todo-item.completed {
-    background: #f8f9fa;
-    border-left-color: #28a745;
+    background: var(--bg-tertiary);
+    border-left-color: var(--success-color);
     opacity: 0.8;
 }
 
 /* Priority Styles */
 .todo-item.priority-high {
-    border-left-color: #dc3545;
-    background: #fff5f5;
+    border-left-color: var(--danger-color);
+    background: var(--priority-high-bg);
 }
 
 .todo-item.priority-medium {
-    border-left-color: #ffc107;
-    background: #fffbf0;
+    border-left-color: var(--warning-color);
+    background: var(--priority-medium-bg);
 }
 
 .todo-item.priority-low {
-    border-left-color: #28a745;
-    background: #f8fff8;
+    border-left-color: var(--success-color);
+    background: var(--priority-low-bg);
 }
 
 .todo-item.priority-high.completed,
 .todo-item.priority-medium.completed,
 .todo-item.priority-low.completed {
-    background: #f8f9fa;
-    border-left-color: #28a745;
+    background: var(--bg-tertiary);
+    border-left-color: var(--success-color);
 }
 
 .priority-badge {
@@ -228,21 +326,22 @@ button:hover {
     font-size: 12px;
     font-weight: bold;
     margin-left: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .priority-high {
-    background: #ffebee;
-    color: #c62828;
+    background: var(--priority-high-bg);
+    color: var(--priority-high-text);
 }
 
 .priority-medium {
-    background: #fff8e1;
-    color: #ef6c00;
+    background: var(--priority-medium-bg);
+    color: var(--priority-medium-text);
 }
 
 .priority-low {
-    background: #e8f5e8;
-    color: #2e7d32;
+    background: var(--priority-low-bg);
+    color: var(--priority-low-text);
 }
 
 /* Categories Styles */
@@ -252,17 +351,18 @@ button:hover {
 
 .category-tag {
     display: inline-block;
-    background: #e9ecef;
-    color: #495057;
+    background: var(--category-bg);
+    color: var(--category-text);
     padding: 4px 8px;
     border-radius: 12px;
     font-size: 12px;
     margin: 2px;
-    border: 1px solid #ced4da;
+    border: 1px solid var(--border-accent);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .category-tag:hover {
-    background: #dee2e6;
+    background: var(--category-hover);
     cursor: pointer;
 }
 
@@ -359,9 +459,10 @@ button:active {
 
 /* Input focus animations */
 input:focus, textarea:focus, select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px var(--accent-blue-light);
     transform: scale(1.02);
+    outline: none;
 }
 
 /* Statistics counter animation */
@@ -585,9 +686,11 @@ input:focus, textarea:focus, select:focus {
 
 .progress-select {
     padding: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-medium);
     border-radius: 3px;
     font-size: 14px;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
 }
 
 /* Action Button Styles */
@@ -610,4 +713,58 @@ input:focus, textarea:focus, select:focus {
 
 .delete-btn:hover {
     background-color: #c82333;
+}
+
+/* Dark Mode Toggle Styles */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-medium);
+    border-radius: 25px;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px var(--shadow-medium);
+}
+
+.theme-toggle-icon {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-text {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .theme-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Smooth theme transition for all elements */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Override for elements that need faster transitions */
+.todo-item:hover,
+.stat-item:hover,
+button:hover,
+.category-tag:hover,
+.priority-badge:hover {
+    transition: all 0.2s ease;
 }
