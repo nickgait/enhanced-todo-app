@@ -20,7 +20,9 @@
       "WebFetch(domain:github.com)",
       "Bash(git push:*)",
       "Bash(gh repo create:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git remote add:*)",
+      "Bash(open index.html)"
     ],
     "deny": []
   }
