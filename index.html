@@ -8,51 +8,59 @@
 </head>
 <body>
     <!-- Dark Mode Toggle Button -->
-    <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
-        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" 
+            aria-label="Toggle dark mode" role="switch" aria-pressed="false">
+        <span class="theme-toggle-icon" id="themeIcon" aria-hidden="true">🌙</span>
         <span class="theme-toggle-text" id="themeText">Dark</span>
-    </div>
+    </button>
 
-    <div class="container">
-        <h1>My Enhanced Todo App</h1>
+    <main class="container">
+        <header>
+            <h1 id="app-title">My Enhanced Todo App</h1>
+        </header>
         
-        <div class="app-header">
-            <div class="stats-container">
-                <div class="stat-item">
-                    <div class="stat-number" id="totalTasks">0</div>
-                    <div class="stat-label">Total Tasks</div>
+        <section class="app-header" role="banner" aria-labelledby="stats-heading">
+            <h2 id="stats-heading" class="sr-only">Task Statistics</h2>
+            <div class="stats-container" role="group">
+                <div class="stat-item" role="group" aria-labelledby="total-tasks-label">
+                    <div class="stat-number" id="totalTasks" aria-describedby="total-tasks-label">0</div>
+                    <div class="stat-label" id="total-tasks-label">Total Tasks</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="completedTasks">0</div>
-                    <div class="stat-label">Completed</div>
+                <div class="stat-item" role="group" aria-labelledby="completed-tasks-label">
+                    <div class="stat-number" id="completedTasks" aria-describedby="completed-tasks-label">0</div>
+                    <div class="stat-label" id="completed-tasks-label">Completed</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="inProgressTasks">0</div>
-                    <div class="stat-label">In Progress</div>
+                <div class="stat-item" role="group" aria-labelledby="progress-tasks-label">
+                    <div class="stat-number" id="inProgressTasks" aria-describedby="progress-tasks-label">0</div>
+                    <div class="stat-label" id="progress-tasks-label">In Progress</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="completionRate">0%</div>
-                    <div class="stat-label">Weighted Completion</div>
+                <div class="stat-item" role="group" aria-labelledby="completion-rate-label">
+                    <div class="stat-number" id="completionRate" aria-describedby="completion-rate-label">0%</div>
+                    <div class="stat-label" id="completion-rate-label">Weighted Completion</div>
                 </div>
             </div>
             
-            <div class="verse-container" id="dailyVerse">
-                <div class="verse-text" id="verseText">Loading daily verse...</div>
-                <div class="verse-reference" id="verseReference"></div>
+            <div class="verse-container" id="dailyVerse" role="complementary" aria-labelledby="verse-heading">
+                <h3 id="verse-heading" class="sr-only">Daily Inspiration</h3>
+                <div class="verse-text" id="verseText" role="text">Loading daily verse...</div>
+                <div class="verse-reference" id="verseReference" role="text"></div>
             </div>
-        </div>
+        </section>
         
-        <div class="input-section">
+        <section class="input-section" role="form" aria-labelledby="form-heading">
+            <h2 id="form-heading" class="sr-only">Add New Task</h2>
             <div class="form-row">
-                <label>Task:</label>
-                <input type="text" id="todoInput" placeholder="Enter task title..." required>
-                <label>Due Date:</label>
-                <input type="date" id="dueDateInput">
+                <label for="todoInput">Task:</label>
+                <input type="text" id="todoInput" placeholder="Enter task title..." required 
+                       aria-describedby="task-help" aria-invalid="false">
+                <label for="dueDateInput">Due Date:</label>
+                <input type="date" id="dueDateInput" aria-describedby="date-help">
             </div>
             
             <div class="form-row">
-                <label>Description:</label>
-                <textarea id="descriptionInput" placeholder="Add task description (optional)..."></textarea>
+                <label for="descriptionInput">Description:</label>
+                <textarea id="descriptionInput" placeholder="Add task description (optional)..." 
+                         aria-describedby="description-help"></textarea>
             </div>
             
             <div class="form-row">
@@ -79,6 +87,41 @@
                 <button onclick="addTodo()" id="addTaskBtn">Add Task</button>
                 <button onclick="cancelEdit()" id="cancelEditBtn" style="display: none;">Cancel Edit</button>
             </div>
+            
+            <!-- Recurring Task Options -->
+            <div class="form-row recurring-section" id="recurringSection">
+                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <label>
+                        <input type="checkbox" id="isRecurringInput" onchange="toggleRecurringOptions()">
+                        🔄 Make this a recurring task
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-row recurring-options" id="recurringOptions" style="display: none;">
+                <label>Frequency:</label>
+                <select id="frequencyInput" onchange="updateIntervalLabel()">
+                    <option value="daily">📅 Daily</option>
+                    <option value="weekly">📅 Weekly</option>
+                    <option value="monthly">📅 Monthly</option>
+                    <option value="yearly">📅 Yearly</option>
+                </select>
+                <label>Every:</label>
+                <input type="number" id="intervalInput" min="1" max="365" value="1" style="width: 80px;">
+                <span id="intervalLabel">day(s)</span>
+            </div>
+            
+            <!-- Task Templates Section -->
+            <div class="form-row templates-section">
+                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <label>📋 Templates:</label>
+                    <select id="templateSelect" onchange="loadTemplate()" style="flex: 1;">
+                        <option value="">Select a template...</option>
+                    </select>
+                    <button type="button" onclick="saveAsTemplate()" class="template-btn">Save as Template</button>
+                    <button type="button" onclick="manageTemplates()" class="template-btn">Manage</button>
+                </div>
+            </div>
         </div>
 
         <div class="search-container" style="display: flex; gap: 15px; margin-bottom: 20px; align-items: center; flex-wrap: wrap;">
@@ -95,6 +138,49 @@
                 <button onclick="exportAsJSON()" style="padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 14px;">JSON</button>
                 <button onclick="exportAsCSV()" style="padding: 8px 12px; background: #17a2b8; color: white; border: none; border-radius: 5px; font-size: 14px;">CSV</button>
                 <button onclick="exportAsText()" style="padding: 8px 12px; background: #ffc107; color: black; border: none; border-radius: 5px; font-size: 14px;">Text</button>
+            </div>
+            
+            <!-- Collapsible Data Management Section -->
+            <div class="collapsible-section" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd;">
+                <div class="collapsible-header" onclick="toggleCollapsible('dataManagement')" style="cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 5px; border: 1px solid var(--border-light);">
+                    <span class="collapse-arrow" id="dataManagementArrow" style="font-size: 12px; transition: transform 0.3s ease;">▶️</span>
+                    <strong style="color: #495057;">🔄 Data Management & Sync</strong>
+                    <span style="margin-left: auto; font-size: 12px; color: #6c757d;">(Click to expand)</span>
+                </div>
+                
+                <div class="collapsible-content" id="dataManagementContent" style="display: none; overflow: hidden; transition: all 0.3s ease;">
+                    <div style="padding: 15px; background: var(--bg-accent); border-radius: 0 0 5px 5px; border: 1px solid var(--border-light); border-top: none;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                            <div style="flex: 1; min-width: 200px;">
+                                <strong style="color: #495057; font-size: 14px;">📦 Backup & Restore:</strong>
+                                <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                                    <button onclick="backupAllData()" style="padding: 6px 10px; background: #17a2b8; color: white; border: none; border-radius: 4px; font-size: 13px;">📦 Backup</button>
+                                    <button onclick="restoreFromBackup()" style="padding: 6px 10px; background: #6c757d; color: white; border: none; border-radius: 4px; font-size: 13px;">📥 Restore</button>
+                                    <button onclick="clearAllData()" style="padding: 6px 10px; background: #dc3545; color: white; border: none; border-radius: 4px; font-size: 13px;">🗑️ Clear All</button>
+                                </div>
+                            </div>
+                            
+                            <div style="flex: 1; min-width: 200px;">
+                                <strong style="color: #495057; font-size: 14px;">📱 Device Sync:</strong>
+                                <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                                    <button onclick="showSyncOptions()" style="padding: 6px 10px; background: #fd7e14; color: white; border: none; border-radius: 4px; font-size: 13px;">🔄 Sync Options</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Keep Calendar and Reminders Always Visible -->
+            <div style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 300px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd;">
+                <label style="font-size: 14px; color: #495057; white-space: nowrap;">📅 Calendar:</label>
+                <button onclick="showCalendarView()" style="padding: 8px 12px; background: #6f42c1; color: white; border: none; border-radius: 5px; font-size: 14px;">📅 Calendar View</button>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 300px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #ddd;">
+                <label style="font-size: 14px; color: #495057; white-space: nowrap;">🔔 Reminders:</label>
+                <button onclick="requestNotificationPermission()" style="padding: 8px 12px; background: #e83e8c; color: white; border: none; border-radius: 5px; font-size: 14px;">🔔 Enable Notifications</button>
+                <button onclick="testNotification()" style="padding: 8px 12px; background: #20c997; color: white; border: none; border-radius: 5px; font-size: 14px;">🧪 Test</button>
             </div>
         </div>
 
@@ -113,8 +199,8 @@
         </div>
 
         <div class="filter-buttons">
-            <button class="filter-btn active" onclick="filterTodos('all')" id="filterAll">All Tasks</button>
-            <button class="filter-btn" onclick="filterTodos('in-progress')" id="filterInProgress">In Progress</button>
+            <button class="filter-btn" onclick="filterTodos('all')" id="filterAll">All Tasks</button>
+            <button class="filter-btn active" onclick="filterTodos('in-progress')" id="filterInProgress">In Progress</button>
             <button class="filter-btn" onclick="filterTodos('completed')" id="filterCompleted">Completed</button>
             
             <div style="margin-left: auto; display: flex; align-items: center; gap: 10px;">

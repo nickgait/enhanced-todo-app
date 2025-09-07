@@ -1,5 +1,36 @@
 /* Enhanced Todo App Styles */
 
+/* Accessibility - Screen Reader Only Text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip Navigation Link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--accent-blue);
+    color: white;
+    padding: 8px;
+    z-index: 1001;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
 /* CSS Variables for Theme Support */
 :root {
     /* Light Theme Colors */
@@ -193,6 +224,382 @@ h1 {
 
 .form-row:last-child {
     margin-bottom: 0;
+}
+
+/* Recurring Task Styling */
+.recurring-section {
+    padding: 10px;
+    background-color: var(--bg-tertiary);
+    border-radius: 5px;
+    border: 1px solid var(--border-light);
+}
+
+.recurring-options {
+    padding: 10px;
+    background-color: var(--bg-accent);
+    border-radius: 5px;
+    border: 1px solid var(--border-medium);
+    transition: all 0.3s ease;
+}
+
+.recurring-options input[type="number"] {
+    text-align: center;
+}
+
+#intervalLabel {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Recurring Badge Styling */
+.recurring-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+    margin-right: 8px;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Missed Task Styling */
+.missed-task {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+}
+
+.missed-task .todo-title {
+    opacity: 0.7;
+}
+
+.missed-badge {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+/* Template Section Styling */
+.templates-section {
+    padding: 10px;
+    background-color: var(--bg-tertiary);
+    border-radius: 5px;
+    border: 1px solid var(--border-light);
+}
+
+.template-btn {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.template-btn:hover {
+    background: var(--accent-blue-dark);
+    transform: translateY(-1px);
+}
+
+/* Time Tracking Styling */
+.time-tracking {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bg-tertiary);
+    padding: 4px 8px;
+    border-radius: 15px;
+    border: 1px solid var(--border-light);
+}
+
+.time-display {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: bold;
+    min-width: 40px;
+}
+
+.timer-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.timer-btn:hover {
+    background: var(--border-light);
+    transform: scale(1.1);
+}
+
+.timer-btn.running {
+    background: #dc3545;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Attachment Styling */
+.attachment-controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.attachment-btn {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.attachment-btn:hover {
+    background: var(--border-light);
+    transform: scale(1.1);
+}
+
+.attachment-count {
+    background: #28a745;
+    color: white;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 8px;
+    font-weight: bold;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+}
+
+.attachments-container {
+    margin-top: 10px;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border-radius: 5px;
+    border: 1px solid var(--border-light);
+}
+
+.attachments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.attachment-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    border: 1px solid var(--border-light);
+}
+
+.attachment-icon {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.attachment-name {
+    flex: 1;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.attachment-name:hover {
+    color: var(--accent-blue);
+    text-decoration: underline;
+}
+
+.attachment-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.attachment-remove:hover {
+    background: #c82333;
+}
+
+/* Sub-task Styling */
+.subtask-controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.subtask-btn {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.subtask-btn:hover {
+    background: var(--border-light);
+    transform: scale(1.1);
+}
+
+.subtask-count {
+    background: #007bff;
+    color: white;
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 8px;
+    font-weight: bold;
+    position: absolute;
+    top: -2px;
+    right: -2px;
+}
+
+.subtasks-container {
+    margin-top: 10px;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border-radius: 5px;
+    border: 1px solid var(--border-light);
+}
+
+.subtasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    border: 1px solid var(--border-light);
+    margin-left: 20px;
+    position: relative;
+}
+
+.subtask-item::before {
+    content: '└';
+    position: absolute;
+    left: -15px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.subtask-checkbox {
+    margin: 0;
+    cursor: pointer;
+}
+
+.subtask-title {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.subtask-title.completed {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.subtask-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subtask-remove:hover {
+    background: #c82333;
+}
+
+/* Calendar Button Styling */
+.calendar-btn {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.calendar-btn:hover {
+    background: var(--border-light);
+    transform: scale(1.1);
+}
+
+/* Notification Highlight Animation */
+@keyframes highlight {
+    0% { background: var(--bg-secondary); }
+    50% { background: #fff3cd; border-left: 4px solid #ffc107; }
+    100% { background: var(--bg-secondary); }
+}
+
+/* Collapsible Section Styling */
+.collapsible-header:hover {
+    background: var(--bg-accent) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.collapsible-content {
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.collapse-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
 }
 
 input[type="text"], input[type="date"], textarea, select {
@@ -767,4 +1174,378 @@ button:hover,
 .category-tag:hover,
 .priority-badge:hover {
     transition: all 0.2s ease;
+}
+
+/* Mobile Responsive Design */
+@media screen and (max-width: 768px) {
+    /* Base mobile adjustments */
+    body {
+        margin: 10px auto;
+        padding: 10px;
+        max-width: 100%;
+    }
+    
+    .container {
+        padding: 15px;
+        margin: 0;
+        border-radius: 8px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+    
+    /* Mobile header and stats */
+    .app-header {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .stats-container {
+        gap: 15px;
+        margin: 10px 0;
+    }
+    
+    .stat-item {
+        min-width: 100px;
+        padding: 8px 12px;
+    }
+    
+    .stat-number {
+        font-size: 20px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+    }
+    
+    /* Mobile verse container */
+    .verse-container {
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 14px;
+    }
+    
+    .verse-reference {
+        font-size: 11px;
+    }
+    
+    /* Mobile form improvements */
+    .input-section {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+    
+    .form-row label {
+        min-width: auto;
+        margin-bottom: 4px;
+    }
+    
+    input[type="text"], input[type="date"], textarea, select {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 12px;
+    }
+    
+    textarea {
+        min-height: 80px;
+    }
+    
+    button {
+        padding: 12px 20px;
+        font-size: 16px;
+        min-height: 44px; /* Touch target size */
+    }
+    
+    /* Mobile filter buttons */
+    .filter-buttons {
+        gap: 8px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        padding: 10px 14px;
+        font-size: 14px;
+        min-height: 44px;
+    }
+    
+    /* Mobile todo items */
+    .todo-item {
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 6px;
+    }
+    
+    .todo-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .todo-actions {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .progress-container {
+        order: -1;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    
+    .progress-select {
+        padding: 8px;
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .edit-btn, .delete-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-height: 44px;
+        flex: 1;
+    }
+    
+    .todo-title {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+    
+    .todo-meta {
+        flex-direction: column;
+        gap: 8px;
+        font-size: 13px;
+    }
+    
+    .todo-meta span {
+        white-space: normal;
+    }
+    
+    .todo-description {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    /* Mobile category tags */
+    .category-tag {
+        font-size: 11px;
+        padding: 3px 6px;
+        margin: 1px;
+    }
+    
+    .priority-badge {
+        font-size: 11px;
+        padding: 2px 6px;
+        margin-left: 8px;
+    }
+    
+    /* Mobile bulk actions */
+    .bulk-actions {
+        padding: 12px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .select-all-container {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .bulk-checkbox {
+        transform: scale(1.3);
+    }
+    
+    /* Mobile theme toggle */
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        padding: 6px;
+        border-radius: 20px;
+    }
+    
+    .theme-toggle-text {
+        display: none; /* Hide text on very small screens */
+    }
+    
+    .theme-toggle-icon {
+        font-size: 18px;
+    }
+}
+
+/* Tablet responsive design */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    body {
+        margin: 20px auto;
+        padding: 15px;
+        max-width: 95%;
+    }
+    
+    .container {
+        padding: 25px;
+    }
+    
+    .form-row {
+        flex-wrap: wrap;
+    }
+    
+    .stats-container {
+        gap: 20px;
+    }
+    
+    .todo-actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+/* Small mobile phones */
+@media screen and (max-width: 480px) {
+    body {
+        margin: 5px auto;
+        padding: 5px;
+    }
+    
+    .container {
+        padding: 10px;
+        border-radius: 6px;
+    }
+    
+    h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .app-header {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .stats-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .stat-item {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .filter-buttons {
+        justify-content: center;
+    }
+    
+    .filter-btn {
+        flex: 1;
+        max-width: 100px;
+    }
+    
+    .todo-item {
+        padding: 12px;
+        margin: 8px 0;
+    }
+    
+    .todo-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .edit-btn, .delete-btn {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .theme-toggle-text {
+        display: none;
+    }
+}
+
+/* Swipe Gesture Styles */
+.todo-item {
+    position: relative;
+    overflow: hidden;
+    touch-action: pan-y; /* Allow vertical scrolling, prevent horizontal */
+}
+
+.todo-item.swiping {
+    transform: translateX(var(--swipe-offset, 0));
+    transition: none; /* Disable transitions during swipe */
+}
+
+.todo-item.swipe-releasing {
+    transition: transform 0.3s ease;
+}
+
+.swipe-action-hint {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.swipe-action-hint.delete {
+    background: var(--danger-color);
+}
+
+.swipe-action-hint.complete {
+    background: var(--success-color);
+}
+
+.swipe-action-hint.visible {
+    opacity: 1;
+}
+
+/* Touch-specific improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device optimizations */
+    .todo-item:hover {
+        transform: none; /* Disable hover effects on touch */
+        box-shadow: 0 2px 4px var(--shadow-light);
+    }
+    
+    .category-tag:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .priority-badge:hover {
+        transform: none;
+    }
+    
+    button:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .stat-item:hover {
+        transform: none;
+        box-shadow: 0 2px 4px var(--shadow-light);
+    }
+    
+    /* Improve touch targets */
+    .bulk-checkbox {
+        transform: scale(1.4);
+    }
+    
+    .theme-toggle {
+        min-width: 44px;
+        min-height: 44px;
+    }
 }
